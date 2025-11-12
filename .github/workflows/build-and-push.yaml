@@ -8,7 +8,7 @@ on:
 
 env:
   REGISTRY: docker.io
-  IMAGE_NAME: paulorhramos/hello-argocd
+  IMAGE_NAME: prhramos/hello-argocd
 
 jobs:
   build-and-push:
