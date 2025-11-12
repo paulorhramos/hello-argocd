@@ -50,26 +50,17 @@ jobs:
           cache-from: type=registry,ref=${{ env.IMAGE_NAME }}:buildcache
           cache-to: type=registry,ref=${{ env.IMAGE_NAME }}:buildcache,mode=max
       
-      - name: Checkout k8s-manifests repository
-        uses: actions/checkout@v4
-        with:
-          repository: paulorhramos/k8s-manifests
-          token: ${{ secrets.GH_PAT }}
-          path: k8s-manifests
-      
       - name: Update Kubernetes manifest
         run: |
-          cd k8s-manifests/hello-argocd
-          sed -i "s|image: ${IMAGE_NAME}:.*|image: ${IMAGE_NAME}:${{ steps.tag.outputs.tag }}|g" deployment.yaml
-          cat deployment.yaml
+          sed -i "s|image: ${IMAGE_NAME}:.*|image: ${IMAGE_NAME}:${{ steps.tag.outputs.tag }}|g" k8s/deployment.yaml
+          cat k8s/deployment.yaml
         env:
           IMAGE_NAME: ${{ env.IMAGE_NAME }}
       
       - name: Commit and push manifest changes
         run: |
-          cd k8s-manifests
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add hello-argocd/deployment.yaml
-          git commit -m "chore: update hello-argocd image to ${{ steps.tag.outputs.tag }}" || echo "No changes to commit"
+          git add k8s/deployment.yaml
+          git commit -m "chore: update image to ${{ steps.tag.outputs.tag }}" || echo "No changes to commit"
           git push
