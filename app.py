@@ -4,7 +4,7 @@ import socket
 
 app = Flask(__name__)
 
-VERSION = os.getenv('APP_VERSION', 'v1.0.0')
+VERSION = os.getenv('APP_VERSION', 'v2.0.0')
 
 @app.route('/')
 def hello():
