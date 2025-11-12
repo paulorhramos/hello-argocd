@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: hello-argocd
-        image: paulorhramos/hello-argocd:latest
+        image: prhramos/hello-argocd:latest
         ports:
         - containerPort: 5000
           name: http
