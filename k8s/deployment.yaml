@@ -18,7 +18,7 @@ spec:
       - name: dockerhub-secret
       containers:
       - name: hello-argocd
-        image: prhramos/hello-argocd:c0fb2fa
+        image: prhramos/hello-argocd:cec5f31
         ports:
         - containerPort: 5000
           name: http
